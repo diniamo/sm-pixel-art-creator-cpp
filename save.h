@@ -1,6 +1,8 @@
 #ifndef SAVE_H
 #define SAVE_H
 
+#include "generator.h"
+#include <opencv2/imgcodecs.hpp>
 #include <QUuid>
 #include <QDir>
 #include <QIODevice>
@@ -41,7 +43,7 @@ namespace SMSaving {
         return QString::fromStdString(ss.str());
     }
 
-    bool saveBlueprint(QString* blueprint, QString* description, const QString& uuid, QDir& blueprintsFolder)
+    bool saveBlueprint(SMGenerators::GeneratedBlueprint* blueprint, const QString& uuid, QDir& blueprintsFolder)
     {
         blueprintsFolder.mkdir(uuid);
         blueprintsFolder.cd(uuid);
@@ -51,11 +53,16 @@ namespace SMSaving {
 
         if(!bpFile.open(QIODevice::WriteOnly)) return false;
         QTextStream bOut(&bpFile);
-        bOut << *blueprint;
+        bOut << blueprint->blueprint;
 
         if(!descFile.open(QIODevice::WriteOnly)) return false;
         QTextStream dOut(&descFile);
-        dOut << *description;
+        dOut << blueprint->description;
+
+        cv::imwrite(blueprintsFolder.absoluteFilePath("icon.png").toStdString(), blueprint->icon);
+
+
+        blueprintsFolder.cdUp();
 
         return true;
     }

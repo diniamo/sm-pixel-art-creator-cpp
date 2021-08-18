@@ -19,8 +19,6 @@ HEADERS += \
 
 #LIBS += -LE:/Programs/OpenCV/build/install/x64/vc16/lib -lopencv_core453 -lopencv_imgcodecs453 -lopencv_imgproc453 -lopencv_features2d453
 
-
-
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../Programs/OpenCV/opencv_4.5.3/build/x64/vc15/lib/ -lopencv_world453
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../Programs/OpenCV/opencv_4.5.3/build/x64/vc15/lib/ -lopencv_world453d
 

@@ -1,5 +1,4 @@
 #include "window.h"
-#include "generator.h"
 #include "save.h"
 #include <QDir>
 #include <QHBoxLayout>
@@ -88,14 +87,12 @@ void Window::generateClicked()
     QString uuid = generateUuid();
     qDebug() << uuid;
 
-    QString *blueprint = generateBlueprint(m_image_label->text(), m_input_width_input->text().toInt(), m_input_height_input->text().toInt());
-    QString *description = generateDescription(uuid);
+    GeneratedBlueprint* blueprint = generateBlueprint(m_image_label->text(), uuid, m_input_width_input->text().toInt(), m_input_height_input->text().toInt());
 
     //cb->setText(*blueprint);
-    saveBlueprint(blueprint, description, uuid, *m_blueprints_folder);
+    saveBlueprint(blueprint, uuid, *m_blueprints_folder);
 
     delete blueprint;
-    delete description;
 
 
     QMessageBox doneBox(QMessageBox::Icon::Information, "Done!", "Generation done.", QMessageBox::NoButton, this);
