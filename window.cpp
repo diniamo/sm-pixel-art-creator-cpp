@@ -1,6 +1,8 @@
 #include "window.h"
+#include "generator.h"
+#include <QDir>
 #include <QHBoxLayout>
-#include <QVboxLayout>
+#include <QVBoxLayout>
 #include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
@@ -8,9 +10,13 @@
 #include <QDebug>
 
 
-Window::Window(QWidget *parent) : QWidget(parent)
+Window::Window(QDir* user_folder, QWidget *parent) : QWidget(parent)
 {
+    setWindowTitle("SM Pixel Art Creator");
     setFixedSize(200, 125);
+    setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+
+    m_user_folder = user_folder;
 
 
     m_image_box = new QHBoxLayout(nullptr);
@@ -52,6 +58,11 @@ Window::Window(QWidget *parent) : QWidget(parent)
 
 
     connect(m_open_image, SIGNAL(clicked()), this, SLOT(imageButtonClicked()));
+    connect(m_generate, SIGNAL(clicked()), this, SLOT(generateClicked()));
+}
+Window::~Window()
+{
+    delete m_user_folder;
 }
 
 void Window::imageButtonClicked()
@@ -61,4 +72,11 @@ void Window::imageButtonClicked()
     qDebug() << file_name;
     setFixedSize(geometry().width() + qMax(0, file_name.length()-12)*5, geometry().height());
     updateGeometry();
+}
+
+void Window::generateClicked()
+{
+    using namespace SMGenerators;
+
+    generateBlueprint(m_image_label->text(), m_input_width_input->text().toInt(), m_input_height_input->text().toInt());
 }

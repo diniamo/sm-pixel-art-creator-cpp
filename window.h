@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+class QDir;
 class QHBoxLayout;
 class QVBoxLayout;
 class QPushButton;
@@ -12,7 +13,11 @@ class Window : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Window(QWidget *parent = nullptr);
+    explicit Window(QDir* user_folder, QWidget *parent = nullptr);
+    ~Window();
+
+private:
+   QDir *m_user_folder;
 
 private:
     QVBoxLayout *m_all_input_box;
@@ -34,6 +39,7 @@ private:
 
 private slots:
     void imageButtonClicked();
+    void generateClicked();
 };
 
 #endif // WINDOW_H
