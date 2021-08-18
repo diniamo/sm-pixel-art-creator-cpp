@@ -3,6 +3,7 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QDebug>
+#include <QUuid>
 
 #include <window.h>
 
@@ -22,6 +23,7 @@ int main(int argc, char **argv)
     userFolder->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
 
     userFolder->cd(userFolder->entryList().first());
+    userFolder->cd("Blueprints");
 
     qDebug() << userFolder->absolutePath();
 

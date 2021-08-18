@@ -1,5 +1,6 @@
 #include "window.h"
 #include "generator.h"
+#include "save.h"
 #include <QDir>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -7,16 +8,18 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QFileDialog>
+#include <QGuiApplication>
+#include <QMessageBox>
 #include <QDebug>
 
 
-Window::Window(QDir* user_folder, QWidget *parent) : QWidget(parent)
+Window::Window(QDir* blueprints_folder, QWidget *parent) : QWidget(parent)
 {
     setWindowTitle("SM Pixel Art Creator");
     setFixedSize(200, 125);
     setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
 
-    m_user_folder = user_folder;
+    m_blueprints_folder = blueprints_folder;
 
 
     m_image_box = new QHBoxLayout(nullptr);
@@ -33,9 +36,9 @@ Window::Window(QDir* user_folder, QWidget *parent) : QWidget(parent)
     m_input_box2 = new QHBoxLayout(nullptr);
 
     m_input_width_label = new QLabel("Width: ");
-    m_input_width_input = new QLineEdit();
+    m_input_width_input = new QLineEdit("128");
     m_input_height_label = new QLabel("Height: ");
-    m_input_height_input = new QLineEdit();
+    m_input_height_input = new QLineEdit("128");
 
     m_input_box1->addWidget(m_input_width_label);
     m_input_box1->addWidget(m_input_width_input);
@@ -62,7 +65,7 @@ Window::Window(QDir* user_folder, QWidget *parent) : QWidget(parent)
 }
 Window::~Window()
 {
-    delete m_user_folder;
+    delete m_blueprints_folder;
 }
 
 void Window::imageButtonClicked()
@@ -77,6 +80,24 @@ void Window::imageButtonClicked()
 void Window::generateClicked()
 {
     using namespace SMGenerators;
+    using namespace SMSaving;
 
-    generateBlueprint(m_image_label->text(), m_input_width_input->text().toInt(), m_input_height_input->text().toInt());
+    //QClipboard *cb = QGuiApplication::clipboard();
+
+
+    QString uuid = generateUuid();
+    qDebug() << uuid;
+
+    QString *blueprint = generateBlueprint(m_image_label->text(), m_input_width_input->text().toInt(), m_input_height_input->text().toInt());
+    QString *description = generateDescription(uuid);
+
+    //cb->setText(*blueprint);
+    saveBlueprint(blueprint, description, uuid, *m_blueprints_folder);
+
+    delete blueprint;
+    delete description;
+
+
+    QMessageBox doneBox(QMessageBox::Icon::Information, "Done!", "Generation done.", QMessageBox::NoButton, this);
+    doneBox.exec();
 }

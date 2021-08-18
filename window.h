@@ -13,11 +13,11 @@ class Window : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Window(QDir* user_folder, QWidget *parent = nullptr);
+    explicit Window(QDir* blueprints_folder, QWidget *parent = nullptr);
     ~Window();
 
 private:
-   QDir *m_user_folder;
+   QDir *m_blueprints_folder;
 
 private:
     QVBoxLayout *m_all_input_box;
