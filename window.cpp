@@ -7,7 +7,6 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QFileDialog>
-#include <QGuiApplication>
 #include <QMessageBox>
 #include <QDebug>
 
@@ -81,13 +80,22 @@ void Window::generateClicked()
     using namespace SMGenerators;
     using namespace SMSaving;
 
-    //QClipboard *cb = QGuiApplication::clipboard();
 
+    int width = m_input_width_input->text().toInt();
+    int height = m_input_height_input->text().toInt();
+
+    // 524288 is the max block limit in SM
+    int pixelAmount = width * height;
+    if(pixelAmount > 524288) {
+        QMessageBox errorBox(QMessageBox::Icon::Critical, "Error", "Specified size is too large: " + QString::number(pixelAmount) + ", limit: 52488");
+        errorBox.exec();
+        return;
+    }
 
     QString uuid = generateUuid();
     qDebug() << uuid;
 
-    GeneratedBlueprint* blueprint = generateBlueprint(m_image_label->text(), uuid, m_input_width_input->text().toInt(), m_input_height_input->text().toInt());
+    GeneratedBlueprint* blueprint = generateBlueprint(m_image_label->text(), uuid, width, height);
 
     //cb->setText(*blueprint);
     saveBlueprint(blueprint, uuid, *m_blueprints_folder);
