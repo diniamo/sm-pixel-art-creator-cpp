@@ -85,7 +85,7 @@ void Window::generateClicked()
     // 39168 is the max block limit in SM
     int pixelAmount = width * height;
     if(pixelAmount > 39168) {
-        QMessageBox errorBox(QMessageBox::Icon::Critical, "Error", "Specified size is too large: " + QString::number(pixelAmount) + ", limit: 52488");
+        QMessageBox errorBox(QMessageBox::Icon::Critical, "Error", "Specified size is too large: " + QString::number(pixelAmount) + ", limit: 39168");
         errorBox.exec();
         return;
     }
