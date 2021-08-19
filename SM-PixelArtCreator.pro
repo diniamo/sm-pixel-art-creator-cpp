@@ -5,6 +5,9 @@ QT = core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+RC_ICONS = icon.ico
+ICON = icon.ico
+
 SOURCES += \
     main.cpp \
     window.cpp
