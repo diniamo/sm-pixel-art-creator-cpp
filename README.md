@@ -24,8 +24,8 @@ Steps:
 - Select the build button in the bottom left corner.
 - Run MSVC's windeployqt.exe on the compiled exe file.
 - Copy the DLLs for the mentioned OpenCV libs next to the exe.
-- Done.
-It's quite a long process, so as I said, I don't recommend doing it.
+
+Done. It's quite a long process, so as I said, I don't recommend doing it.
 
 ## Contact
 Discord: diniamo#6987
