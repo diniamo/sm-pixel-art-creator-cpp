@@ -24,8 +24,6 @@ int main(int argc, char **argv)
     userFolder->cd(userFolder->entryList().first());
     userFolder->cd("Blueprints");
 
-    qDebug() << userFolder->absolutePath();
-
     Window window(userFolder);
     window.show();
 

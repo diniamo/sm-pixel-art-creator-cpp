@@ -69,7 +69,6 @@ void Window::imageButtonClicked()
 {
     QString file_name = QFileDialog::getOpenFileName(this, "Open image", QDir::homePath());
     m_image_label->setText(file_name);
-    qDebug() << file_name;
     setFixedSize(geometry().width() + qMax(0, file_name.length()-12)*5, geometry().height());
     updateGeometry();
 }
@@ -92,7 +91,6 @@ void Window::generateClicked()
     }
 
     QString uuid = generateUuid();
-    qDebug() << uuid;
 
     GeneratedBlueprint* blueprint = generateBlueprint(m_image_label->text(), uuid, width, height);
 
