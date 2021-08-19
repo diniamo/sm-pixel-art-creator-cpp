@@ -17,7 +17,7 @@
 namespace SMGenerators {
     typedef QString str;
 
-    QJsonObject getBlock(int x, int y, const QString &color, const QString &shapeId)
+    QJsonObject getBlock(int x, int y, QString const &color, QString const &shapeId)
     {   
         return QJsonObject({
                                  { str("bounds"), QJsonObject(
@@ -41,7 +41,7 @@ namespace SMGenerators {
                               });
     }
 
-    QJsonObject getBase(QJsonArray &blocks)
+    QJsonObject getBase(QJsonArray const &blocks)
     {
         return QJsonObject({
                                    { str("bodies"), QJsonArray({ QJsonObject({ { str("childs"), blocks } }) }) },
@@ -49,7 +49,7 @@ namespace SMGenerators {
                                });
     }
 
-    QString generateDescription(const QString& uuid)
+    QString generateDescription(QString const &uuid)
     {
         return QString(QJsonDocument(QJsonObject({
                                    { str("description"), str("Generated with SM Pixel Art Creator by diniamo.") },
@@ -75,7 +75,7 @@ namespace SMGenerators {
         cv::Mat icon;
     };
 
-    GeneratedBlueprint* generateBlueprint(const QString& imagePath, const QString& uuid, int width, int height)
+    GeneratedBlueprint* generateBlueprint(QString const &imagePath, const QString& uuid, int width, int height)
     {
         using namespace cv;
 

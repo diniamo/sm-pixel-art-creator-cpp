@@ -43,7 +43,7 @@ namespace SMSaving {
         return QString::fromStdString(ss.str());
     }
 
-    bool saveBlueprint(SMGenerators::GeneratedBlueprint* blueprint, const QString& uuid, QDir& blueprintsFolder)
+    bool saveBlueprint(SMGenerators::GeneratedBlueprint* blueprint, QString const &uuid, QDir &blueprintsFolder)
     {
         blueprintsFolder.mkdir(uuid);
         blueprintsFolder.cd(uuid);
