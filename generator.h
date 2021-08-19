@@ -83,13 +83,14 @@ namespace SMGenerators {
 
         Mat image = imread(imagePath.toStdString());
         Mat resized;
-        resize(image, resized, Size(width, height), INTER_LINEAR);
+        resize(image, resized, Size(width, height), INTER_AREA);
+        imwrite("test.jpg", resized);
 
         qDebug() << "Channels: " << resized.channels();
 
         unsigned char *input = (unsigned char*)(resized.data);
-        for(int j = 0; j < resized.rows ;j++){
-            for(int i = 0; i < resized.cols; i++){
+        for(int j = 0; j < resized.cols ;j++){
+            for(int i = 0; i < resized.rows; i++){
                 unsigned char b = input[resized.step * i + j*3] ;
                 unsigned char g = input[resized.step * i + j*3 + 1];
                 unsigned char r = input[resized.step * i + j*3 + 2];
@@ -101,7 +102,7 @@ namespace SMGenerators {
         }
 
         Mat icon;
-        resize(resized, icon, Size(128, 128), INTER_LINEAR);
+        resize(resized, icon, Size(128, 128), INTER_AREA);
 
         return new GeneratedBlueprint{
             QString(QJsonDocument(getBase(blocks)).toJson()),
