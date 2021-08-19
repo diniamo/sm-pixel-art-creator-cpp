@@ -8,7 +8,6 @@
 #include <QLineEdit>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QDebug>
 
 
 Window::Window(QDir* blueprints_folder, QWidget *parent) : QWidget(parent)

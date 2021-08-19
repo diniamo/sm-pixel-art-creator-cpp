@@ -2,7 +2,6 @@
 #include <QPushButton>
 #include <QDir>
 #include <QStandardPaths>
-#include <QDebug>
 #include <QUuid>
 
 #include <window.h>

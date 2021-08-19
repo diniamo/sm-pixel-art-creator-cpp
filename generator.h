@@ -84,9 +84,6 @@ namespace SMGenerators {
         Mat image = imread(imagePath.toStdString());
         Mat resized;
         resize(image, resized, Size(width, height), INTER_AREA);
-        imwrite("test.jpg", resized);
-
-        qDebug() << "Channels: " << resized.channels();
 
         unsigned char *input = (unsigned char*)(resized.data);
         for(int j = 0; j < resized.cols ;j++){
