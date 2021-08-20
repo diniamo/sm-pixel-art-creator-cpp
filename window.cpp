@@ -82,17 +82,19 @@ void Window::generateClicked()
     int width = m_input_width_input->text().toInt();
     int height = m_input_height_input->text().toInt();
 
-    // 39168 is the max block limit in SM
+    // above 40000 you 99% won't be able to place it in creative
     int pixelAmount = width * height;
-    if(pixelAmount > 39168) {
-        QMessageBox errorBox(QMessageBox::Icon::Critical, "Error", "Specified size is too large: " + QString::number(pixelAmount) + ", limit: 39168");
+    if(pixelAmount > 40000) {
+        QMessageBox errorBox(QMessageBox::Icon::Warning, "Warning - Size too large", "Specified size is way too large: " + QString::number(pixelAmount) + " (it's still gonna generated in case you want to use it in survival, where there is no limit)");
         errorBox.exec();
-        return;
     }
 
     QString uuid = generateUuid();
 
     GeneratedBlueprint* blueprint = generateBlueprint(m_image_label->text(), uuid, width, height);
+
+    qDebug() << "Length: " << blueprint->blueprint.length();
+    qDebug() << "Size: " << sizeof(blueprint->blueprint);
 
     //cb->setText(*blueprint);
     saveBlueprint(blueprint, uuid, *m_blueprints_folder);

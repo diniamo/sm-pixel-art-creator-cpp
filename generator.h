@@ -102,7 +102,7 @@ namespace SMGenerators {
         resize(resized, icon, Size(128, 128), INTER_AREA);
 
         return new GeneratedBlueprint{
-            QString(QJsonDocument(getBase(blocks)).toJson()),
+            QString(QJsonDocument(getBase(blocks)).toJson(QJsonDocument::Compact)),
             generateDescription(uuid),
             icon
         };
