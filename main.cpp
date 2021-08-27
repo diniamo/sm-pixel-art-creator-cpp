@@ -4,7 +4,8 @@
 #include <QStandardPaths>
 #include <QUuid>
 
-#include <window.h>
+//#include <window.h>
+#include <form.h>
 
 
 int main(int argc, char **argv)
@@ -24,8 +25,10 @@ int main(int argc, char **argv)
     userFolder->cd(userFolder->entryList().first());
     userFolder->cd("Blueprints");
 
-    Window window(userFolder);
-    window.show();
+    //Window window(userFolder);
+    //window.show();
+    Form form(userFolder);
+    form.show();
 
     return app.exec();
 }

@@ -9,13 +9,21 @@ RC_ICONS = icon.ico
 ICON = icon.ico
 
 SOURCES += \
+    form.cpp \
     main.cpp \
-    window.cpp
+#    window.cpp
 
 HEADERS += \
+    form.h \
     generator.h \
     save.h \
-    window.h \
+#    window.h \
+
+FORMS += \
+    form.ui
+
+RESOURCES += \
+    resources.qrc
 
 INCLUDEPATH += E:/Programs/opencv/build/install/include
 DEPENDPATH += E:/Programs/opencv/build/install/include
