@@ -4,8 +4,6 @@
 This is mostly a learning experience for me, so any criticism on the code is welcome.
 As well as suggestions.
 
-I'm planning on doing a styled implementation in the future, but I still have yet to learn a lot until I can make that.
-
 ## Usage
 - Download the latest release, or build the project yourself (steps written bellow, not recommended).
 - Open the exe file.
